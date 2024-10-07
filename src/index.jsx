@@ -42,6 +42,26 @@ const allCourses = [
 					},
 				]
 			},
+			{
+				startHour: '12',
+				endHour: '14',
+				courses: [
+					{
+						name: '📖 ANALIZĂ MATEMATICĂ I (AM) – Conf. Dr. Antoanela TOMA (BNS04)',
+						groups: [ ...Object.values(GROUPS) ]
+					}
+				]
+			},
+			{
+				startHour: '14',
+				endHour: '16',
+				courses: [
+					{
+						name: '📖 CHIMIE (CH) – Conf. Dr. George Octavian BUICĂ (CD006)',
+						groups: [ ...Object.values(GROUPS) ]
+					}
+				]
+			},
 		]
 	},
 	{
