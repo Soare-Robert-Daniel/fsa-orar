@@ -219,10 +219,8 @@ const allCourses = [
 	}
 ]
 
-console.log(Object.values(GROUPS))
-
 export function App() {
-	const [selectedGroup, setSelectedGroup] = useState(localStorage.getItem('selectedGroup') || '');
+	const [selectedGroup, setSelectedGroup] = useState(localStorage.getItem('selectedGroup') || GROUPS.b1311);
 
 	const handleGroupChange = (event) => {
 		const group = event.target.value;
