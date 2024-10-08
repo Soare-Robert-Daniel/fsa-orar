@@ -1,5 +1,5 @@
 import { render } from 'preact';
-import { useState } from 'preact/hooks';
+import { useState, useMemo, useEffect } from 'preact/hooks';
 
 import './style.css';
 
@@ -25,7 +25,8 @@ const allCourses = [
 				endHour: '10',
 				courses: [
 					{
-						name: '✏️ DMB (BN113)',
+						name: '✏️ DMB',
+						location: 'BN133',
 						groups: [ GROUPS.a1311, GROUPS.b1311 ],
 						odd: true
 					},
@@ -36,7 +37,8 @@ const allCourses = [
 				endHour: '12',
 				courses: [
 					{
-						name: '⛹️ Ed. fizică (Sală)',
+						name: '⛹️ Ed. fizică',
+						location: 'Sală',
 						groups: [ GROUPS.a1311, GROUPS.b1311 ],
 						odd: true
 					},
@@ -47,7 +49,9 @@ const allCourses = [
 				endHour: '14',
 				courses: [
 					{
-						name: '📖 ANALIZĂ MATEMATICĂ I (AM) – Conf. Dr. Antoanela TOMA (BNS04)',
+						name: '📖 ANALIZĂ MATEMATICĂ I (AM)',
+						location: 'BNS04',
+						instructor: 'Conf. Dr. Antoanela TOMA',
 						groups: [ ...Object.values(GROUPS) ]
 					}
 				]
@@ -57,7 +61,9 @@ const allCourses = [
 				endHour: '16',
 				courses: [
 					{
-						name: '📖 CHIMIE (CH) – Conf. Dr. George Octavian BUICĂ (CD006)',
+						name: '📖 CHIMIE (CH)',
+						location: 'CD006',
+						instructor: 'Conf. Dr. George Octavian BUICĂ',
 						groups: [ ...Object.values(GROUPS) ]
 					}
 				]
@@ -65,14 +71,15 @@ const allCourses = [
 		]
 	},
 	{
-		name: 'Marti',
+		name: 'Marți',
 		intervals: [
 			{
 				startHour: '8',
 				endHour: '10',
 				courses: [
 					{
-						name: '🧪 PCLPb (BNS05)',
+						name: '🧪 PCLPb',
+						location: 'BNS05',
 						groups: [ GROUPS.b1311 ]
 					},
 				]
@@ -82,7 +89,9 @@ const allCourses = [
 				endHour: '12',
 				courses: [
 					{
-						name: '📖 DATA MINING & BIG DATA (DMB) – Conf. Dr. Alina Claudia PETRESCU-NIȚĂ (BNS04)',
+						name: '📖 DATA MINING & BIG DATA (DMB)',
+						location: 'BNS04',
+						instructor: 'Conf. Dr. Alina Claudia Petrescu-Niță',
 						groups: [ ...Object.values(GROUPS) ]
 					}
 				]
@@ -92,12 +101,14 @@ const allCourses = [
 				endHour: '14',
 				courses: [
 					{
-						name: '✏️ ENG (AN220)',
+						name: '✏️ ENG',
+						location: 'AN220',
 						groups: [ GROUPS.a1311, GROUPS.b1311 ],
 						odd: true
 					},
 					{
-						name: '✏️ FIZ (BNS04)',
+						name: '✏️ FIZ',
+						location: 'BNS04',
 						groups: [ GROUPS.a1311, GROUPS.b1311 ],
 						odd: false
 					}
@@ -108,7 +119,8 @@ const allCourses = [
 				endHour: '16',
 				courses: [
 					{
-						name: '✏️ FAC_PE (BN122b)',
+						name: '✏️ FAC_PE [OPTIONAL]',
+						location: 'BN122b',
 						groups: [ GROUPS.a1311, GROUPS.b1311 ]
 					}
 				]
@@ -118,7 +130,9 @@ const allCourses = [
 				endHour: '18',
 				courses: [
 					{
-						name: '📖 Curs facultativ: PSIHOLOGIA EDUCAȚIEI (FAC_PE) – Lect. Dr. Ana Voichița TEBEANU (BN113)',
+						name: '📖 Psihologia Educației (FAC_PE)',
+						instructor: 'Lect. Dr. Ana Voichița Tebenu',
+						location: 'BN113',
 						groups: [ ...Object.values(GROUPS) ]
 					}
 				]
@@ -133,7 +147,8 @@ const allCourses = [
 				endHour: '12',
 				courses: [
 					{
-						name: '✏️ ALG (AN220)',
+						name: '✏️ ALG',
+						location: 'AN220',
 						groups: [ GROUPS.a1311, GROUPS.b1311 ]
 					},
 				]
@@ -143,7 +158,8 @@ const allCourses = [
 				endHour: '14',
 				courses: [
 					{
-						name: '✏️ AM (AN211)',
+						name: '✏️ AM',
+						location: 'AN211',
 						groups: [ GROUPS.a1311, GROUPS.b1311 ]
 					},
 				]
@@ -153,22 +169,26 @@ const allCourses = [
 				endHour: '16',
 				courses: [
 					{
-						name: '🧪 DMBa (BNS06)',
+						name: '🧪 DMBa',
+						location: 'BNS06',
 						groups: [ GROUPS.a1311 ],
 						odd: true
 					},
 					{
-						name: '🧪 CHb (EG104)',
+						name: '🧪 CHb',
+						location: 'EG104',
 						groups: [ GROUPS.b1311 ],
 						odd: true
 					},
 					{
-						name: '🧪 Cha (EG104)',
+						name: '🧪 Cha',
+						location: 'EG104',
 						groups: [ GROUPS.a1311 ],
 						odd: false
 					},
 					{
-						name: '🧪 DMBb (BNS06)',
+						name: '🧪 DMBb',
+						location: 'BNS06',
 						groups: [ GROUPS.b1311 ],
 						odd: false
 					}
@@ -179,7 +199,8 @@ const allCourses = [
 				endHour: '18',
 				courses: [
 					{
-						name: '🧪 PCLPa (BNS05)',
+						name: '🧪 PCLPa',
+						location: 'BNS05',
 						groups: [ GROUPS.a1311 ]
 					}
 				]
@@ -194,7 +215,9 @@ const allCourses = [
 				endHour: '12',
 				courses: [
 					{
-						name: '📖 FIZICĂ I (FIZ) – Ș.L. Dr. Victor-Cristian PALEA (AN024)',
+						name: '📖 FIZICĂ I (FIZ)',
+						instructor: 'Ș.L. Dr. Victor-Cristian PALEA',
+						location: 'AN024',
 						groups: [ ...Object.values(GROUPS) ]
 					},
 				]
@@ -204,7 +227,9 @@ const allCourses = [
 				endHour: '14',
 				courses: [
 					{
-						name: '📖 PROGRAMAREA CALCULATOARELOR ȘI LIMBAJE DE PROGRAMARE I (PCLP) – Prof. Dr. Andreea Ioana UDREA (AN024)',
+						name: '📖 PROGRAMAREA CALCULATOARELOR ȘI LIMBAJE DE PROGRAMARE I (PCLP)',
+						instructor: 'Prof. Dr. Andreea Ioana UDREA',
+						location: 'AN024',
 						groups: [ ...Object.values(GROUPS) ]
 					},
 				]
@@ -214,12 +239,16 @@ const allCourses = [
 				endHour: '16',
 				courses: [
 					{
-						name: '📖 CULTURĂ ȘI INSTITUȚII EUROPENE (CIE) – Lect. Dr. Maricica Daniela COTOARĂ (AN024)',
+						name: '📖 CULTURĂ ȘI INSTITUȚII EUROPENE (CIE)',
+						instructor: 'Lect. Dr. Maricica Daniela COTOARĂ',
+						location: 'AN024',
 						groups: [ Object.values(GROUPS) ],
 						odd: true
 					},
 					{
-						name: '📖 LIMBA ENGLEZĂ I (ENG) – Conf. Dr. Brândușa RĂILEANU (AN024)',
+						name: '📖 LIMBA ENGLEZĂ I (ENG)',
+						instructor: 'Conf. Dr. Brândușa RĂILEANU',
+						location: 'AN024',
 						groups: [ ...Object.values(GROUPS) ],
 						odd: false
 					},
@@ -230,7 +259,9 @@ const allCourses = [
 				endHour: '18',
 				courses: [
 					{
-						name: '📖 ALGEBRĂ LINIARĂ, GEOMETRIE ANALITICĂ ȘI DIFERENȚIALĂ I (ALG) – Prof. Dr. Gabriel-Eduard VÎLCU (AN015)',
+						name: '📖 ALGEBRĂ LINIARĂ, GEOMETRIE ANALITICĂ ȘI DIFERENȚIALĂ I (ALG)',
+						instructor: 'Prof. Dr. Gabriel-Eduard VÎLCU',
+						location: 'AN015',
 						groups: [ ...Object.values(GROUPS) ]
 					},
 				]
@@ -239,8 +270,37 @@ const allCourses = [
 	}
 ]
 
+/**
+ * Get the current interval based on the current day of the week and hour (24h format).
+ * 
+ * @returns {string} A hash composed from `day-startHour-endHour`.
+ */
+function getCurrentInterval(courses) {
+	const daysOfWeek = ['Duminică', 'Luni', 'Marți', 'Miercuri', 'Joi', 'Vineri', 'Sâmbătă'];
+    const now = new Date();
+    const currentDay = daysOfWeek[now.getDay()];
+    const currentHour = now.getHours();
+	console.log(currentDay, currentHour);
+	console.log(courses);
+    for (const day of courses) {
+        if (day.name === currentDay) {
+            for (const interval of day.intervals) {
+                if (
+					currentHour >= parseInt(interval.startHour, 10) && 
+					currentHour < parseInt(interval.endHour, 10)
+				) {
+                    return `${currentDay}-${interval.startHour}-${interval.endHour}`;
+                }
+            }
+        }
+    }
+
+    return '';
+}
+
 export function App() {
 	const [selectedGroup, setSelectedGroup] = useState(localStorage.getItem('selectedGroup') || GROUPS.b1311);
+	const [currentInterval, setCurrentInterval] = useState('');
 
 	const handleGroupChange = (event) => {
 		const group = event.target.value;
@@ -248,15 +308,32 @@ export function App() {
 		localStorage.setItem('selectedGroup', group);
 	};
 
-	const filteredCourses = allCourses.map(day => ({
-		...day,
-		intervals: day.intervals.map(interval => ({
-			...interval,
-			courses: interval.courses.filter(course => 
-				selectedGroup === '' || (Array.isArray(course.groups) && course.groups.includes(selectedGroup))
-			)
-		})).filter(interval => interval.courses.length > 0)
-	})).filter(day => day.intervals.length > 0);
+	const filteredCourses = useMemo(
+		() => (
+				allCourses.map(day => ({
+				...day,
+				intervals: day.intervals.map(interval => ({
+					...interval,
+					courses: interval.courses.filter(course => 
+						selectedGroup === '' || (Array.isArray(course.groups) && course.groups.includes(selectedGroup))
+					)
+				})).filter(interval => interval.courses.length > 0)
+			})).filter(day => day.intervals.length > 0)
+		)
+		, [selectedGroup]
+	);
+
+	useEffect(() => {
+		setCurrentInterval( getCurrentInterval( filteredCourses ) );
+
+		const timer = setInterval(() => {
+			setCurrentInterval( getCurrentInterval( filteredCourses ) );
+		}, 900);
+		
+		return () => {
+			clearInterval( timer );
+		}
+	}, [ filteredCourses ]);
 
 	return (
 		<div>
@@ -276,11 +353,14 @@ export function App() {
 					<div className={'day-container'} key={day.name}>
 						<h2>{day.name}</h2>
 						{day.intervals.map(interval => (
-							<div className={'hour-container'} key={`${day.name}-${interval.startHour}`}>
+							<div
+								className={`hour-container ${ currentInterval === `${day.name}-${interval.startHour}-${interval.endHour}` ? 'current-hour': '' }`}
+								key={`${day.name}-${interval.startHour}`}
+							>
 								<h3 className={'interval'}>{interval.startHour}-{interval.endHour}</h3>
-								<div>
+								<div className={'course-list'}>
 									{interval.courses.map(course => (
-										<p key={course.name}>
+										<p className={'course-item'} key={course.name}>
 											{course.name}
 											{
 												undefined !== course.odd && (
@@ -288,6 +368,15 @@ export function App() {
 													{
 														course.odd ? 'impar' : 'par'
 													}
+													</span>
+												)
+											}
+											{
+												course?.location && (
+													<span className={'location'}>
+														{
+															course.location
+														}
 													</span>
 												)
 											}

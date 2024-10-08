@@ -64,6 +64,8 @@ h1, h2, h3, p, ul, li {
 	font-size: 120%;
 	display: flex;
 	flex-direction: row;
+	padding: 0 3px;
+	border: 10px;
 }
 
 .interval {
@@ -73,16 +75,38 @@ h1, h2, h3, p, ul, li {
 	word-break: keep-all;
 }
 
+.course-list {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	gap: 1px;
+}
+
 .badge {
-	margin-left: 5px;
 	padding: 1px 5px;
 	border-radius: 5px;
 	background-color: rgb(133, 0, 0);
 	color: white;
+	line-height: 1;
+}
+
+.course-item {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
 }
 
 .badge.even {
 	background-color: rgb(0, 113, 133);
+}
+
+.location {
+	flex-grow: 1;
+	text-align: right;
+}
+
+.current-hour {
+	background-color: rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 639px) {
@@ -96,5 +120,9 @@ h1, h2, h3, p, ul, li {
 	:root {
 		color: #ccc;
 		background-color: #1a1a1a;
+	}
+
+	.current-hour {
+		background-color: rgba(255, 0, 167, 0.2);
 	}
 }
