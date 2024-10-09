@@ -271,17 +271,23 @@ const allCourses = [
 ]
 
 /**
+ * Get the current day slug and hour.
+ * 
+ * @returns {[string, number]}
+ */
+function getCurrentDayAndHour() {
+	const now = new Date();
+	const daysOfWeek = ['Duminică', 'Luni', 'Marți', 'Miercuri', 'Joi', 'Vineri', 'Sâmbătă'];
+	return [daysOfWeek[now.getDay()], now.getHours()];
+}
+
+/**
  * Get the current interval based on the current day of the week and hour (24h format).
  * 
  * @returns {string} A hash composed from `day-startHour-endHour`.
  */
 function getCurrentInterval(courses) {
-	const daysOfWeek = ['Duminică', 'Luni', 'Marți', 'Miercuri', 'Joi', 'Vineri', 'Sâmbătă'];
-    const now = new Date();
-    const currentDay = daysOfWeek[now.getDay()];
-    const currentHour = now.getHours();
-	console.log(currentDay, currentHour);
-	console.log(courses);
+	const [currentDay, currentHour] = getCurrentDayAndHour();
     for (const day of courses) {
         if (day.name === currentDay) {
             for (const interval of day.intervals) {
@@ -323,13 +329,17 @@ export function App() {
 		, [selectedGroup]
 	);
 
+	const currentDay = useMemo(() => {
+		return getCurrentDayAndHour()[0];
+	}, []);
+
 	useEffect(() => {
 		setCurrentInterval( getCurrentInterval( filteredCourses ) );
 
 		const timer = setInterval(() => {
 			setCurrentInterval( getCurrentInterval( filteredCourses ) );
 		}, 900);
-		
+
 		return () => {
 			clearInterval( timer );
 		}
@@ -351,7 +361,14 @@ export function App() {
 			<section className={'courses'}>
 				{filteredCourses.map(day => (
 					<div className={'day-container'} key={day.name}>
-						<h2>{day.name}</h2>
+						<div className={'day-header'}>
+							<h2 className={ currentDay === day.name ? 'current-day' : ''}>{day.name}</h2>
+							{
+								currentDay === day.name && (
+									<span class={'day-header-separator'} />
+								)
+							}
+						</div>
 						{day.intervals.map(interval => (
 							<div
 								className={`hour-container ${ currentInterval === `${day.name}-${interval.startHour}-${interval.endHour}` ? 'current-hour': '' }`}
