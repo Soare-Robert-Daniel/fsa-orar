@@ -405,6 +405,11 @@ export function App() {
 					</div>
 				))}
 			</section>
+			<footer>
+				<a href={'https://github.com/Soare-Robert-Daniel/fsa-orar'}>
+					Cod sursă 
+				</a>
+			</footer>
 		</div>
 	);
 }
