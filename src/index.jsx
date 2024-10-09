@@ -304,6 +304,15 @@ function getCurrentInterval(courses) {
     return '';
 }
 
+function isOddWeek() {
+    const referenceDateForOddWeek = new Date('2024-9-30').getTime();
+    const currentDate = new Date().getTime();
+    const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
+
+    const weeksSinceReference = Math.floor((currentDate - referenceDateForOddWeek) / oneWeekInMilliseconds) + 1;
+    return weeksSinceReference % 2 !== 0;
+}
+
 export function App() {
 	const [selectedGroup, setSelectedGroup] = useState(localStorage.getItem('selectedGroup') || GROUPS.b1311);
 	const [currentInterval, setCurrentInterval] = useState('');
@@ -333,6 +342,10 @@ export function App() {
 		return getCurrentDayAndHour()[0];
 	}, []);
 
+	const oddWeek = useMemo(() => {
+		return isOddWeek();
+	}, []);
+
 	useEffect(() => {
 		setCurrentInterval( getCurrentInterval( filteredCourses ) );
 
@@ -356,6 +369,14 @@ export function App() {
 							<option key={group} value={group}>{group}</option>
 						))}
 					</select>
+				</div>
+				<div>
+					Săptămâna este
+					<span style={{ marginLeft: '5px'}} className={`badge ${oddWeek ? 'odd' : 'even'}`}>
+					{
+						oddWeek ? 'impară' : 'pară'
+					}
+					</span>
 				</div>
 			</header>
 			<section className={'courses'}>
