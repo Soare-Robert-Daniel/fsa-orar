@@ -242,7 +242,7 @@ const allCourses = [
 						name: '📖 CULTURĂ ȘI INSTITUȚII EUROPENE (CIE)',
 						instructor: 'Lect. Dr. Maricica Daniela COTOARĂ',
 						location: 'AN024',
-						groups: [ Object.values(GROUPS) ],
+						groups: [ ...Object.values(GROUPS) ],
 						odd: true
 					},
 					{
