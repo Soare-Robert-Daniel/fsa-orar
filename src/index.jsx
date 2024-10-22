@@ -115,17 +115,6 @@ const allCourses = [
 				]
 			},
 			{
-				startHour: '14',
-				endHour: '16',
-				courses: [
-					{
-						name: '✏️ FAC_PE [OPTIONAL]',
-						location: 'BN122b',
-						groups: [ GROUPS.a1311, GROUPS.b1311 ]
-					}
-				]
-			},
-			{
 				startHour: '16',
 				endHour: '18',
 				courses: [
@@ -134,6 +123,17 @@ const allCourses = [
 						instructor: 'Lect. Dr. Ana Voichița Tebenu',
 						location: 'BN113',
 						groups: [ ...Object.values(GROUPS) ]
+					}
+				]
+			},
+			{
+				startHour: '18',
+				endHour: '20',
+				courses: [
+					{
+						name: '✏️ FAC_PE [OPTIONAL]',
+						location: 'BN122b',
+						groups: [ GROUPS.a1311, GROUPS.b1311 ]
 					}
 				]
 			},
